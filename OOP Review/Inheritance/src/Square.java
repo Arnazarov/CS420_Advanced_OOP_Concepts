@@ -1,8 +1,7 @@
 public class Square extends Shape {
 
     // data members
-    private double side;
-    private String name;
+    protected double side;
 
     public Square(double side, String name) {
         super(name);
@@ -28,9 +27,8 @@ public class Square extends Shape {
             return this.name.equals(oth.name) && this.side == oth.side;
         }
     }
-
     @Override
     public String toString() {
-        return this.name + ":" + this.side;
+        return(this.name + ":" + this.side);
     }
 }
