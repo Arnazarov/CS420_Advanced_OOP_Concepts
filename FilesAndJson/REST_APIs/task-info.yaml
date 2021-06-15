@@ -1,0 +1,244 @@
+type: edu
+files:
+- name: src/Task.java
+  visible: true
+  text: |-
+    public class Task {
+        public static void main(String[] args){
+            OnlineRecipeDatabase ord = new OnlineRecipeDatabase();
+            try {
+                String ommelets = ord.formatRecipeAsString(ord.getRecipesByDish("ommelette"));
+                String gotRice = ord.formatRecipeAsString(ord.getRecipesByIngredients("rice,onions"));
+                System.out.println(ommelets);
+                System.out.println(gotRice);
+                ord.saveRecipes(gotRice,"rice.txt");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+  learner_created: false
+- name: test/Tests.java
+  visible: false
+  text: |-
+    import com.github.cliftonlabs.json_simple.JsonArray;
+    import com.github.cliftonlabs.json_simple.JsonObject;
+
+    import org.junit.Assert;
+    import org.junit.Before;
+    import org.junit.Test;
+
+    import java.io.File;
+    import java.io.FileNotFoundException;
+
+    public class Tests {
+      private OnlineRecipeDatabase ord;
+      private JsonObject obj1,obj2;
+      private JsonArray arr1,arr2;
+
+      @Before
+      public void setEnv(){
+        ord = new OnlineRecipeDatabase();
+        try {
+          obj1 = ord.getRecipesByDish("artichoke");
+          obj2 = ord.getRecipesByIngredients("cheese,mayonnaise");
+        }catch(Exception e){
+          Assert.fail("Your Methods for getRecipesBy... are throwing an exception when they shouldn't:\n"+e.getMessage());
+        }
+        arr1 = (JsonArray) obj1.get("results");
+        arr2 = (JsonArray) obj2.get("results");
+
+      }
+
+      @Test
+      public void testRetrieval() {
+        // put your test here
+        String list=null;
+        int elems = obj1.keySet().size();
+        String site = (String)obj1.get("title");
+        String oneDish = (String)((JsonObject)arr2.get(0)).get("ingredients");
+        list = ord.formatRecipeAsString(obj2);
+        Assert.assertEquals("Are you reading/converting the full JSON document?",4,elems);
+      }
+
+      @Test
+      public void testReturningJsonDocs(){
+        Assert.assertTrue("Are your recipes by dish coming as a JsonArray?",arr1.size()>6 && arr1.size()<11);
+        Assert.assertTrue("Are your recipes by ingredient coming as a JsonArray?",arr2.size()>6 && arr1.size()<11);
+      }
+
+      @Test
+      public void testContent(){
+        String oneDish = (String)((JsonObject)arr2.get(0)).get("ingredients");
+        Assert.assertTrue("Are you sure you are querying the right thing on getRecipe by ingredients?", oneDish.contains("cheese"));
+      }
+      @Test
+      public void testJSONStructure(){
+        String site = (String)obj1.get("title");
+        String oneDish = (String)((JsonObject)arr2.get(0)).get("ingredients");
+        String list = ord.formatRecipeAsString(obj2);
+        Assert.assertTrue("Are you returning the full JsonObject?",site.equals("Recipe Puppy"));
+        Assert.assertTrue("Are you formatting the Json as String correctly?",list.contains(oneDish));
+      }
+
+      @Test
+      public void testWriteDoc(){
+        String list = ord.formatRecipeAsString(obj2);
+        ord.saveRecipes(list,"test.txt");
+        try{
+          File f = new File("test.txt");
+          Assert.assertTrue("Are you sure you are saving a file with the name that comes in the parameter?",f.exists());
+          Assert.assertEquals("Are you writing the file as directed?",f.length(),list.length());
+        }catch(SecurityException e){
+          Assert.fail("Are you saving the file with ANY filename that is passed?");
+        }
+      }
+    }
+  learner_created: false
+- name: src/OnlineRecipeDatabase.java
+  visible: true
+  placeholders:
+  - offset: 593
+    length: 120
+    placeholder_text: "/* TODO \nYou have to use the url to retrieve the contents\
+      \ of the website. \nThis will be a String, but in JSON format. */"
+    initial_state:
+      length: 120
+      offset: 593
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: |2-
+
+              // From now on is like reading from the keyboard...
+              Scanner scan = new Scanner(url.openStream());
+              String result="";
+              while (scan.hasNext())
+              {
+                  result += scan.nextLine();
+
+              }
+              scan.close();
+  - offset: 729
+    length: 44
+    placeholder_text: "/* TODO \nRemember to return a JSON object.*/"
+    initial_state:
+      length: 44
+      offset: 729
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: (JsonObject) Jsoner.deserialize(result, new JsonObject())
+  - offset: 922
+    length: 43
+    placeholder_text: "/* TODO \nFill in this data type (Object) */"
+    initial_state:
+      length: 43
+      offset: 922
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: URL
+  - offset: 976
+    length: 41
+    placeholder_text: |-
+      /* TODO
+      Fill in this datatype (Object) */
+    initial_state:
+      length: 41
+      offset: 976
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: URL
+  - offset: 1046
+    length: 52
+    placeholder_text: |-
+      /* TODO
+      Read the information coming from the web
+       */
+    initial_state:
+      length: 52
+      offset: 1046
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: |2-
+       // From now on is like reading from the keyboard...
+              Scanner scan = new Scanner(url.openStream());
+              String result="";
+              while (scan.hasNext())
+              {
+                  result += scan.nextLine();
+
+              }
+              scan.close();
+  - offset: 1114
+    length: 42
+    placeholder_text: "/* TODO \nreturn the appropriate result.\n*/"
+    initial_state:
+      length: 42
+      offset: 1114
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: (JsonObject) Jsoner.deserialize(result, new JsonObject());
+  - offset: 1258
+    length: 172
+    placeholder_text: "/* TODO \nThis should return a String with each recipe in three\
+      \ lines:\nTitle:the title of the recipe\nLink:the link to the recipe\nIngredients:The\
+      \ ingredients of teh recipe.*/"
+    initial_state:
+      length: 172
+      offset: 1258
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: |-
+      JsonArray recipes = (JsonArray) doc.get("results");
+              for(Object r : recipes){
+                  JsonObject obj = (JsonObject) r;
+                  results += "Title:"+(String)obj.get("title")+"\n";
+                  results += "link:"+(String)obj.get("href")+"\n";
+                  results += "ingredients:"+(String)obj.get("ingredients")+"\n";
+              }
+  - offset: 1528
+    length: 116
+    placeholder_text: "/* TODO\nGiven a String with some text in it, write that text\
+      \ to a file. \nThe name of the file is given in outfile */"
+    initial_state:
+      length: 116
+      offset: 1528
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: |-
+      try(DataOutputStream out = new DataOutputStream(new FileOutputStream(outfile))){
+                  out.writeBytes(text);
+              }catch(IOException e){
+                  e.printStackTrace();
+              }
+  text: "import com.github.cliftonlabs.json_simple.JsonArray;\nimport com.github.cliftonlabs.json_simple.JsonObject;\n\
+    import com.github.cliftonlabs.json_simple.Jsoner;\nimport java.io.DataOutputStream;\n\
+    import java.io.FileOutputStream;\nimport java.io.IOException;\nimport java.net.URL;\n\
+    import java.util.Scanner;\n\npublic class OnlineRecipeDatabase {\n\n    String\
+    \ baseUrl = \"http://www.recipepuppy.com/api/?\";\n\n    public JsonObject getRecipesByIngredients(String\
+    \ ingredients) throws Exception\n    {\n        //Getting the things ready to\
+    \ connect to the web\n        URL url = new URL(baseUrl+\"i=\"+ingredients);\n\
+    /* TODO \nYou have to use the url to retrieve the contents of the website. \n\
+    This will be a String, but in JSON format. */\n        return /* TODO \nRemember\
+    \ to return a JSON object.*/;\n    }\n\n    public JsonObject getRecipesByDish(String\
+    \ dish) throws Exception\n    {\n        //Getting the things ready to connect\
+    \ to the web\n        /* TODO \nFill in this data type (Object) */ url = new /*\
+    \ TODO\nFill in this datatype (Object) */(baseUrl+\"q=\"+dish);\n\n       /* TODO\n\
+    Read the information coming from the web\n */\n        return /* TODO \nreturn\
+    \ the appropriate result.\n*/\n    }\n\n\n    public String formatRecipeAsString(JsonObject\
+    \ doc){\n        String results = \"\";\n        /* TODO \nThis should return\
+    \ a String with each recipe in three lines:\nTitle:the title of the recipe\nLink:the\
+    \ link to the recipe\nIngredients:The ingredients of teh recipe.*/\n        return\
+    \ results;\n    }\n\n    public void saveRecipes(String text, String outfile){\n\
+    \        /* TODO\nGiven a String with some text in it, write that text to a file.\
+    \ \nThe name of the file is given in outfile */\n    }\n\n}\n"
+  learner_created: false
+status: Unchecked
+record: -1

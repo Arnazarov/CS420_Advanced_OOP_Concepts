@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestShape" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-06-15T16:11:49" hostname="WEKIL" time="0.012">
+  <properties/>
+  <testcase name="testShapeConstructor" classname="TestShape" time="0.012"/>
+  <testcase name="testShapeConstructorFunctionality" classname="TestShape" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
