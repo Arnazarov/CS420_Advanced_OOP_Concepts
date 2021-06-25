@@ -28,7 +28,7 @@ public class Database {
     }
 
     public Database(String contents) {
-          // Alternative code
+//           Alternative code
 //        colNames = (contents.substring(0, contents.indexOf("\n"))).split(",");
 //        contents = contents.substring(contents.indexOf("\n"),contents.lastIndexOf("\n"));
 //        contents = contents.replaceFirst("\n", "");
