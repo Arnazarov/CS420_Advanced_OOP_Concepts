@@ -9,8 +9,8 @@ public class Task {
         System.out.println("Most frequent:"+c.mostFrequent());
         System.out.println("With count "+c.getCount(c.mostFrequent()));
 
-      /* TODO
-Create a counter of String objects called words., and make it work for the words in the String text above. That way, the rest will compile. */);
+        String[] arr = text.split(" ");
+        Counter<String> words = new Counter<>(arr);
         System.out.println("Most frequent word:"+words.mostFrequent());
         System.out.println("With "+words.getCount(words.mostFrequent())+" occurrences");
         System.out.println("The word sort appears "+words.getCount("sort")+" times");
