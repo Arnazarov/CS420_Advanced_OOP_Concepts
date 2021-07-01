@@ -23,6 +23,7 @@ public class Card <V,S>{
     }
 
     public String toString(){
+
         return value+" of "+suit;
     }
 }

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Task {
     public static void main(String[] args){
@@ -16,14 +17,25 @@ public class Task {
         System.out.println("Cards add:"+addCards(hand));
 
 
-        for(Card /* TODO
-Compete a for loop that prints every card
-in the deck d */
+        for(Card card : d)
+            System.out.print(card + ", ");
 
     }
 
     public static int addCards(ArrayList<Card> hand){
- /* TODO 
-This should compute the sum of values of the cards in an ArrayList of cards.*/
+        int total = 0;
+        for (Card card : hand) {
+            if (card.getValue().equals("Ace"))
+                total += 1;
+            else if (card.getValue().equals("Jack"))
+                total += 11;
+            else if (card.getValue().equals("Queen"))
+                total += 12;
+            else if (card.getValue().equals("King"))
+                total += 13;
+            else
+                total += (int) card.getValue();
+        }
+        return total;
     }
 }
