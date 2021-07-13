@@ -1,13 +1,11 @@
 public class Task {
-    public static void main(String[] args){
+    public static void main(String[] args) throws InterruptedException{
         Car c1 = new Car("Kona",250);
         Car c2 = new Car("Ioniq",220);
 
-        Runnable r/* TODO 
-Create a racer with c1 */cer(c1);
-        Racer/* TODO 
-Create a Racer with c2*/Racer(c/* TODO:
-Create two threads using "new Thread" and pass  one Runnable 
-to each thread.  It is your job to figure out which are the Runnables.*/cer2).start();
+        Runnable racer = new Racer(c1);
+        Runnable racer2 = new Racer(c2);
+        (new Thread(racer)).start();
+        (new Thread (racer2)).start();
     }
 }
