@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class WebPage {
+
     public List<String> dom; // this actually has the html document model.
 
     public WebPage(){

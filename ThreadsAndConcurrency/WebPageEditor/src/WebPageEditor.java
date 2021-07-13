@@ -14,7 +14,6 @@ public class WebPageEditor {
     }
 
     public void start(){
-
         ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
         service.scheduleAtFixedRate(()->{
             if (checkSave())
