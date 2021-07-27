@@ -3,16 +3,12 @@ public class Task {
         Person p = new Person("Kim Possible","2000-01-01");
         p.setPosition("Associate", 34000);
         Resume r = new Resume(p);
-        /* TODO */
-Create an education object. Schoo is NEIU, major is Computer Science.
-       /* TODO */
-add this education object to the resume "r"
-        /* TODO */
-Create a new Experience object and add it to the resume.
-        r.addExperience(/* TODO */
-Create a new experience object on the fly, inside the addExperiece call.);
-        r.addExperience(/* TODO */
-Add another experience object on the fly as you add it.);
+        Resume.Education education = r.new Education("NEIU","Computer Science");
+        r.addEducation(education);
+        Resume.Experience experience = new Resume.Experience("Junior Analyst", 2020,2021);
+        r.addExperience(experience);
+        r.addExperience(new Resume.Experience("Escape Runner", 2019,2020));
+        r.addExperience(new Resume.Experience("UI Designer", 2018,2019));
         System.out.println(r); //watch the resume print.
 
     }
