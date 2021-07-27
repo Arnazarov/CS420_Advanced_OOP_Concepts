@@ -3,6 +3,7 @@ import java.util.List;
 
 public class Task {
     public static void main(String[] args){
+
         Person p1 = new Person("John Doe","2001-05-23");
         Person p2 = new Person("Kate Park","2000-04-28");
         Person p3 = new Person("Kim Tracy","1998-11-04");
